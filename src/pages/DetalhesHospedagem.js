@@ -38,18 +38,30 @@ export default function DetalhesHospedagem(){
     }else{
         return (
             <DetalhesPassagem>
-                <h1>Detalhes da passagem para {detalhes[0].destino}</h1>
+                <h1>Detalhes da hospedagem para {detalhes[0].localHospedagem}</h1>
     
-                <div className="imagem">
-                    <div>
-                        <p>Cidade de Destino: {detalhes[0].destino}</p>
-                        <p>Cidade de Origem: {detalhes[0].origem}</p>
-                        <p>Companhia aérea: {detalhes[0].companhia}</p>
-                        <p>Horário de partida: {detalhes[0].horarioPartida}</p>
-                        <p>Horário previsto de chgada: {detalhes[0].horarioChegada}</p>
-                        <p>Preço da passagem: R$ {detalhes[0].precoPassagem}</p>
-                    </div>
-                    <img src={detalhes[0].urlFoto} />
+                <FotosHospedagem>
+                    {
+                        fotos.map((foto) => 
+                            <img key={foto.id} src={foto.url} alt="foto hospedagem" />
+                        )
+                    }
+                </FotosHospedagem>
+
+                <div className="main">
+                    <CaracteristicasHospedagem>
+                        <li>{detalhes[0].localHospedagem}</li>
+                        <li>{detalhes[0].precoHospedagem}</li>
+                        <li>{detalhes[0].descricaoHospedagem}</li>
+                    </CaracteristicasHospedagem>
+
+                    <ComodidadesHospedagem>
+                        {
+                            comodidades.map((comodidade) => 
+                                <li key={comodidade.id}>{comodidade.comodidade}</li>
+                            )
+                        }
+                    </ComodidadesHospedagem>
                 </div>
             </DetalhesPassagem>
         );
@@ -62,18 +74,52 @@ const DetalhesPassagem = styled.div`
         font-size: 40px;
         margin: 10px
     }
-    p{
-        margin: 10px;
-        font-size: 25px;
-    }
-
-    .imagem{
-        margin-top: 30px;
+    .main{
+        width: 100vw;
         display: flex;
-        justify-content: space-around;
-        img{
-            width: 200px;
-            height: 200px;
-        }
+    }
+`
+
+const FotosHospedagem = styled.div`
+    display: flex;
+    align-items: center;
+    height: 150px;
+    border-radius: 3px;
+    border: 1px solid #DBDBDB;
+    padding: 0 18px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    position: relative;
+    margin-bottom: 40px;
+    img{
+        height: 130px;
+        width: 130px;
+        margin: 10px;
+    }
+`
+
+const CaracteristicasHospedagem = styled.ul`
+    background-color: #1e66eb;
+    width: 45%;
+    height: 400px;
+    border-radius: 6px;
+    margin: auto;
+    list-style-type: circle;
+    li{
+        margin-top: 5px;
+        margin-left: 20px;
+    }
+`
+
+const ComodidadesHospedagem = styled.ul`
+    background-color: #1e66eb;
+    width: 45%;
+    height: 400px;
+    border-radius: 6px;
+    margin: auto;
+    list-style-type: circle;
+    li{
+        margin-top: 5px;
+        margin-left: 20px;
     }
 `
